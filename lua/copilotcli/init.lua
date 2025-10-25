@@ -1,5 +1,6 @@
 local M = {}
 local win_id = nil
+local buf_id = nil
 
 function M.toggle_copilot()
   if win_id and vim.api.nvim_win_is_valid(win_id) then
@@ -7,10 +8,16 @@ function M.toggle_copilot()
     win_id = nil
   else
     vim.cmd('vsplit | wincmd l')
-    vim.cmd('vertical resize 50')
-    local buf = vim.api.nvim_create_buf(false, true)
-    vim.api.nvim_win_set_buf(0, buf)
-    vim.fn.termopen('copilot')
+    vim.cmd('vertical resize 70')
+    
+    if not buf_id or not vim.api.nvim_buf_is_valid(buf_id) then
+      buf_id = vim.api.nvim_create_buf(false, true)
+      vim.api.nvim_win_set_buf(0, buf_id)
+      vim.fn.termopen('copilot')
+    else
+      vim.api.nvim_win_set_buf(0, buf_id)
+    end
+    
     vim.wo.winfixwidth = true
     win_id = vim.api.nvim_get_current_win()
   end
