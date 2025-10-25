@@ -1,29 +1,25 @@
 # copilotcli.nvim
 
-Neovim plugin starter.
+GitHub Copilot CLI in Neovim.
 
-## Setup
+## Install
+
+**lazy.nvim**
 
 ```lua
--- lua/copilotcli/init.lua
-local M = {}
-
-function M.setup()
-  print("Hello World")
-end
-
-return M
+{
+  "sunnybharne/copilotcli.nvim",
+  config = function()
+    require('copilotcli').setup()
+  end
+}
 ```
 
 ## Usage
 
-```lua
--- In your init.lua
-require('copilotcli').setup()
-```
+`:Cocli` - Opens copilot in right split
 
-## Learn
+## Requirements
 
-1. Create `lua/copilotcli/init.lua`
-2. Call `setup()` function
-3. Neovim loads from `lua/` directory
+- `gh copilot` installed
+- Neovim 0.8+
