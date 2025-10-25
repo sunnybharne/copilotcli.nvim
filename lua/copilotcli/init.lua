@@ -2,7 +2,7 @@ local M = {}
 
 function M.open_copilot()
   vim.cmd('vsplit | wincmd l')
-  vim.cmd('vertical resize 30')
+  vim.cmd('vertical resize 50')
   local buf = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_win_set_buf(0, buf)
   vim.fn.termopen('copilot')
