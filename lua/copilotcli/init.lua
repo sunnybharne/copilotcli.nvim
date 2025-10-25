@@ -9,16 +9,19 @@ function M.toggle_copilot()
   else
     vim.cmd('vsplit | wincmd l')
     vim.cmd('vertical resize 70')
-    
+
     if not buf_id or not vim.api.nvim_buf_is_valid(buf_id) then
       buf_id = vim.api.nvim_create_buf(false, true)
       vim.api.nvim_win_set_buf(0, buf_id)
-      vim.fn.termopen('copilot')
+      vim.bo[buf_id].filetype = 'terminal'
+      vim.fn.termopen('TERM=xterm-256color copilot')
     else
       vim.api.nvim_win_set_buf(0, buf_id)
     end
-    
+
     vim.wo.winfixwidth = true
+    vim.wo.list = false
+    vim.wo.conceallevel = 0
     win_id = vim.api.nvim_get_current_win()
   end
 end
